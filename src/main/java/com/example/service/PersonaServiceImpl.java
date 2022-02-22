@@ -3,6 +3,7 @@ package com.example.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.ConsolaApplication;
@@ -12,6 +13,7 @@ import com.example.repository.IPersonaRepo;
 public class PersonaServiceImpl implements IPersonaService{
 	
 	@Autowired
+	@Qualifier("persona2")
 	private IPersonaRepo iPersonaRepo;
 	
     Logger logger = LoggerFactory.getLogger(ConsolaApplication.class);
