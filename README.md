@@ -1,8 +1,32 @@
-PASOS
+a. Tenemos dos implementaciones de la misma interfaz en una capa de la app.
+b. Una la nombramos:
 
-  a. ARQUITECTURA: Se crea una interfaz y una implementación por capa.
-  b. REGISTRAR BEAN: Se anota las implementaciones Service y Repository con la anotación: @Service y @Repository (De esta manera se DEFINEN ambas instancias en el contenedor de Spring)
-  c. ACCEDER AL BEAN (Inyección de dependencias): Accedemos a las 2 instancias definidas (objetos=beans) DEFINIDAS en el contenedor de SPRING con: @Autowired (ámbito SINGLETON).   
+	@Repository	                  
+	@Qualifier("persona1")
+	
+	Otra
+	
+	@Repository	                  
+	@Qualifier("persona2")	
 
-TEORÍA
-	  Los estereotipos b) sirven para registar un BEAN en el contenedor de Spring. Y se contextualiza su uso @Service @Repository, esto es una recomendación.
+c. En el servicio para usar por ejemplo la implementación "persona2", accedemos a esta implementación que está en el contenedor de Spring
+   Usando:
+   
+		@Autowired
+		@Qualifier("persona2")
+		private IPersonaRepo iPersonaRepo;
+		
+
+IMPORTANCIA, imaginemos esta situación.
+
+Tenemos:
+
+	Una interfaz que define unas operaciones.
+	Una clase antigua que la implementa con una tecnología_1.
+	
+	Ahora: 
+	Se crea una clase nueva que la implementa con una tecnología_2
+	
+	Para usar esta nueva implementación bastará con cambiar el @Qualifier("---") para apuntar a la nueva implementación.
+	De esta manera cuando se haga uso de iPersonaRepo ya estará apuntando a las nuevas implemtaciones de la interfaz.
+	
